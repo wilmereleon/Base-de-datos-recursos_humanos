@@ -4,26 +4,27 @@ CREATE DATABASE recursos_humanos_fisico;
 -- Usar la base de datos
 USE recursos_humanos_fisico;
 
-   CREATE TABLE PAISES (
+-- creación de tablas
+CREATE TABLE PAISES (
        pais_ID INT PRIMARY KEY AUTO_INCREMENT,
        pais_nombre VARCHAR(255) NOT NULL
    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
    
-      CREATE TABLE CIUDADES (
+CREATE TABLE CIUDADES (
        ciud_ID INT PRIMARY KEY AUTO_INCREMENT,
        ciud_nombre VARCHAR(255) NOT NULL,
        ciud_pais_ID INT,
        FOREIGN KEY (ciud_pais_ID) REFERENCES PAISES(pais_ID)
    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
    
-   CREATE TABLE LOCACIONES (
+CREATE TABLE LOCACIONES (
        localiz_ID INT PRIMARY KEY AUTO_INCREMENT,
        localiz_direccion VARCHAR(255) NOT NULL,
        localiz_ciudad_ID INT,
        FOREIGN KEY (localiz_ciudad_ID) REFERENCES CIUDADES(ciud_ID)
    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
    
-      CREATE TABLE DEPARTAMENTOS (
+CREATE TABLE DEPARTAMENTOS (
        dpto_ID INT PRIMARY KEY AUTO_INCREMENT,
        dpto_nombre VARCHAR(255) NOT NULL,
        dpto_localiz_ID INT,
@@ -31,7 +32,7 @@ USE recursos_humanos_fisico;
    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
    
    
-      CREATE TABLE CARGOS (
+CREATE TABLE CARGOS (
        cargo_ID INT PRIMARY KEY AUTO_INCREMENT,
        cargo_nombre VARCHAR(255) NOT NULL,
        cargo_sueldo_minimo DECIMAL(10, 2) NOT NULL,
@@ -39,7 +40,7 @@ USE recursos_humanos_fisico;
    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
    
    
-     CREATE TABLE EMPLEADOS (
+CREATE TABLE EMPLEADOS (
        empl_ID INT PRIMARY KEY AUTO_INCREMENT,
        empl_primer_nombre VARCHAR(255) NOT NULL,
        empl_segundo_nombre VARCHAR(255),
@@ -64,6 +65,7 @@ USE recursos_humanos_fisico;
        FOREIGN KEY (emphist_dpto_ID) REFERENCES DEPARTAMENTOS(dpto_ID)
    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
    
+		--  Uso de claves
         CREATE INDEX idx_pais_nombre ON PAISES(pais_nombre);
         
 		CREATE INDEX idx_ciud_nombre ON CIUDADES(ciud_nombre);
@@ -76,7 +78,7 @@ USE recursos_humanos_fisico;
         
 		CREATE INDEX idx_empl_email ON EMPLEADOS(empl_email);
         
-        -- Insertar datos de prueba en la tabla PAISES
+-- Insertar datos de prueba en la tabla PAISES
 INSERT INTO PAISES (pais_nombre) VALUES
 ('Colombia'),
 ('Argentina'),
